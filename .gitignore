@@ -1,0 +1,9 @@
+.DS_Store
+rsconnect/
+launch_rstudio.sh
+Archive.zip
+shinyQuantR.Rproj
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
