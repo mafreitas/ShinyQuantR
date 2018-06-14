@@ -8,14 +8,15 @@
 #    http://shiny.rstudio.com/
 #
 
-
-
 # Define UI for application that draws a histogram
 shinyUI(
   
+  
+
   # Application title
+
   navbarPage("DataScienceTemplate",
-    tabPanel("Load Data",
+      tabPanel("Load Data",
       sidebarLayout(
         # Sidebar
         sidebarPanel(
@@ -23,11 +24,12 @@ shinyUI(
             accept=c('text/csv', 
               'text/comma-separated-values,text/plain', 
               '.csv')),
+          numericInput("id_col", "ID Column:", 1, min = 1, max = 10),
           checkboxInput('header', 'Header', TRUE),
           checkboxInput('mq', 'MaxQuant', FALSE),
           radioButtons('sep', 'Separator',
             c(Comma=',',Semicolon=';',Tab='\t'),
-            '\t'),
+            ','),
           radioButtons('quote', 'Quote',
             c(None='','Double Quote'='"','Single Quote'="'"),
             '"')

@@ -12,35 +12,34 @@ if (!require("pacman")) install.packages("pacman")
 pacman::p_load(shiny, DT, limma, 
                psych, ggplot2,
                genefilter,reshape2,
-               stringr,missForest)
-
-library(shiny)
-library(DT)
-library(limma)
-library(psych)
-library(ggplot2)
-library(genefilter)
-library(reshape2)
-library(stringr)
-library(missForest)
-
+               stringr,missForest,shinyjs)
 
 options(shiny.maxRequestSize=1000*1024^2) 
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   
+  observeEvent(input$close, {
+    js$closeWindow()
+    stopApp()
+  })
+  
+  
   datafile <- reactive({
     req(input$file1)
     
-    data.return <- read.table(
+    data.return <- read.csv(
       input$file1$datapath,
       header = input$header,
       sep = input$sep,
       quote = input$quote
     )
     colnames(data.return) = make.names(colnames(data.return))
-    
+    print(colnames)
+    if (!('Protein.IDs' %in% colnames(data.return)) ){
+      colnames(data.return)[input$id_col] <- 'Protein.IDs' 
+    }
+        
     data.return
   })
   
